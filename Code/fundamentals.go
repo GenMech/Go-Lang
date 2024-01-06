@@ -69,3 +69,5 @@ func hashmap() {
         fmt.Println("n == n2")
     }
 }
+
+//The _ (underscore) is known as the blank identifier in Go. We can use the blank identifier to declare and use the unused variables. The unused variables are the variables that are only defined once in the program and not used. 
