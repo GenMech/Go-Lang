@@ -11,6 +11,7 @@ func main() {
 	array() // basic of arrays
 	hashmap() // hashmaps basics
     ranges() // for ranges
+    multipleKeyVal()
 }
 
 //The Go fmt package supports two closely-related functions for formatting a string to be displayed on the terminal. Print() accepts strings as arguments and concatenates them without any spacing. . Println() , on the other hand, adds a space between strings and appends a new line to the concatenated output string
@@ -100,4 +101,20 @@ func ranges(){
     for i, c := range "go" {
         fmt.Println(i, c)
     }
+}
+
+
+func vals() (int, int) {
+    return 3, 7
+}
+
+// We can use identifier if we want the only the subset of the return value
+func multipleKeyVal() {
+
+    a, b := vals()
+    fmt.Println(a)
+    fmt.Println(b)
+
+    _, c := vals()
+    fmt.Println(c)
 }
