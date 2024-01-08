@@ -12,6 +12,7 @@ func main() {
 	hashmap() // hashmaps basics
     ranges() // for ranges
     multipleKeyVal()
+    recusion()
 }
 
 //The Go fmt package supports two closely-related functions for formatting a string to be displayed on the terminal. Print() accepts strings as arguments and concatenates them without any spacing. . Println() , on the other hand, adds a space between strings and appends a new line to the concatenated output string
@@ -117,4 +118,28 @@ func multipleKeyVal() {
 
     _, c := vals()
     fmt.Println(c)
+}
+
+// Recursion in Go
+func fact(n int) int {
+    if n == 0 {
+        return 1
+    }
+    return n * fact(n-1)
+}
+
+func recusion() {
+    fmt.Println(fact(7))
+
+    var fib func(n int) int
+
+    fib = func(n int) int {
+        if n < 2 {
+            return n
+        }
+
+        return fib(n-1) + fib(n-2)
+    }
+
+    fmt.Println(fib(7))
 }
