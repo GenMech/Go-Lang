@@ -7,16 +7,16 @@ import (
 
 func main() {
     fmt.Println("hello world")
-    basic() // for loop basics
-	array() // basic of arrays
-	hashmap() // hashmaps basics
-    ranges() // for ranges
-    multipleKeyVal()
-    recusion()
+    // basic() // for loop basics
+	// array() // basic of arrays
+	// hashmap() // hashmaps basics
+    // ranges() // for ranges
+    // multipleKeyVal()
+    // recusion() // recursion in Go
+    closures()
 }
 
 //The Go fmt package supports two closely-related functions for formatting a string to be displayed on the terminal. Print() accepts strings as arguments and concatenates them without any spacing. . Println() , on the other hand, adds a space between strings and appends a new line to the concatenated output string
-
 
 // For loop in Go
 func basic(){
