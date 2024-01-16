@@ -43,3 +43,6 @@ func structExample() {
     }
     fmt.Println(dog)
 }
+
+
+//If a struct type is only used for a single value, we don’t have to give it a name. The value can have an anonymous struct type
