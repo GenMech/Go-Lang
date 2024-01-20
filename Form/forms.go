@@ -53,3 +53,13 @@ func main() {
 	fmt.Println("Server is running on http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
+
+// Package http provides HTTP client and server implementations.
+// Get, Head, Post, and PostForm make HTTP (or HTTPS) requests:
+
+// resp, err := http.Get("http://example.com/")
+// ...
+// resp, err := http.Post("http://example.com/upload", "image/jpeg", &buf)
+// ...
+// resp, err := http.PostForm("http://example.com/form",
+// 	url.Values{"key": {"Value"}, "id": {"123"}})
