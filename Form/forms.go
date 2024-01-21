@@ -63,3 +63,5 @@ func main() {
 // ...
 // resp, err := http.PostForm("http://example.com/form",
 // 	url.Values{"key": {"Value"}, "id": {"123"}})
+
+// gorilla/mux is a package which adapts to Go’s default HTTP router. It comes with a lot of features to increase the productivity when writing web applications. It is also compliant to Go’s default request handler signature func (w http.ResponseWriter, r *http.Request), so the package can be mixed and machted with other HTTP libraries like middleware or exisiting applications. Use the go get command to install the package from GitHub like so:
