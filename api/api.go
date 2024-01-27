@@ -20,6 +20,17 @@ func getUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
+func handleUser(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodGet:
+		getUser(w, r)
+	case http.MethodPost:
+		createUser(w, r)
+	default:
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+	}
+}
+
 func getUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -75,8 +86,7 @@ func main() {
 
 	// API endpoints
 	http.HandleFunc("/api/users", getUsers)
-	http.HandleFunc("/api/user", getUser)
-	http.HandleFunc("/api/user", createUser)
+	http.HandleFunc("/api/user", handleUser)
 
 	// Start the server
 	fmt.Println("API server is running on http://localhost:8080")
