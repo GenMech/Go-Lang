@@ -62,22 +62,28 @@ func getUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func createUser(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+    // Retrieve form values from the request
+    username := r.FormValue("username")
+    email := r.FormValue("email")
 
-	var newUser User
-	err := json.NewDecoder(r.Body).Decode(&newUser)
-	if err != nil {
-		http.Error(w, "Error decoding request body", http.StatusBadRequest)
-		return
-	}
+    // Create a new User object with the form values
+    newUser := User{
+        ID:       len(users) + 1,
+        Username: username,
+        Email:    email,
+    }
 
-	// Generate a simple ID for the new user
-	newUser.ID = len(users) + 1
+    // Log the newUser object
+    fmt.Println("New user:", newUser)
 
-	users = append(users, newUser)
+    // Add the newUser to the users slice
+    users = append(users, newUser)
 
-	json.NewEncoder(w).Encode(newUser)
+    // Respond with the newUser as JSON
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(newUser)
 }
+
 
 func mainPage(w http.ResponseWriter, r *http.Request) {
     // Serve the HTML file containing the basic UI

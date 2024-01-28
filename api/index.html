@@ -41,21 +41,27 @@
         .getElementById("addUserForm")
         .addEventListener("submit", function (event) {
           event.preventDefault();
-          const formData = new FormData(this);
+          const formData = new FormData(addUserForm);
           console.log("formData:", formData);
           fetch("/api/user", {
             method: "POST",
             body: formData,
           })
             .then((response) => {
-              response.json(), console.log("response", response);
+              return response.json();
+              console.log("response", response);
             })
             .then((user) => {
+              console.log("user:", user);
               const table = document.getElementById("usersTable");
               const row = table.insertRow();
-              row.insertCell().textContent = user.id;
-              row.insertCell().textContent = user.username;
-              row.insertCell().textContent = user.email;
+              row.insertCell().textContent = user?.id;
+              row.insertCell().textContent = user?.username;
+              row.insertCell().textContent = user?.email;
+
+              // Clear the form fields
+              document.getElementById("username").value = "";
+              document.getElementById("email").value = "";
             })
             .catch((error) => console.error("Error:", error));
         });
