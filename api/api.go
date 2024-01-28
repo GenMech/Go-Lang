@@ -79,10 +79,17 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(newUser)
 }
 
+func mainPage(w http.ResponseWriter, r *http.Request) {
+    // Serve the HTML file containing the basic UI
+    http.ServeFile(w, r, "./index.html")
+}
+
 func main() {
 	// Initializing some dummy users for demonstration purposes
 	users = append(users, User{ID: 1, Username: "user1", Email: "user1@example.com"})
 	users = append(users, User{ID: 2, Username: "user2", Email: "user2@example.com"})
+
+	http.HandleFunc("/", mainPage)
 
 	// API endpoints
 	http.HandleFunc("/api/users", getUsers)
