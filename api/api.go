@@ -26,6 +26,8 @@ func handleUser(w http.ResponseWriter, r *http.Request) {
 		getUser(w, r)
 	case http.MethodPost:
 		createUser(w, r)
+	case http.MethodDelete:
+		deleteUser(w, r)
 	default:
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
@@ -82,6 +84,39 @@ func createUser(w http.ResponseWriter, r *http.Request) {
     // Respond with the newUser as JSON
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(newUser)
+}
+
+func deleteUser(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	// Extracting the "id" parameter from the request URL
+	id := r.URL.Query().Get("id")
+	fmt.Println("ID:", id)
+
+	// Assuming a simple case where IDs are integers
+	// In a real-world scenario, you would need proper validation
+	// and error handling here
+	userID := 0
+	fmt.Sscanf(id, "%d", &userID)
+
+	// Find the index of the user with the specified ID
+	index := -1
+	for i, user := range users {
+		if user.ID == userID {
+			index = i
+			break
+		}
+	}
+
+	if index == -1 {
+		http.NotFound(w, r)
+		return
+	}
+
+	// Remove the user from the slice
+	users = append(users[:index], users[index+1:]...)
+
+	w.WriteHeader(http.StatusOK)
 }
 
 
