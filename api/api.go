@@ -27,7 +27,10 @@ func handleUser(w http.ResponseWriter, r *http.Request) {
 	case http.MethodPost:
 		createUser(w, r)
 	case http.MethodDelete:
-		deleteUser(w, r)
+		{
+			fmt.Println("I am here")
+			deleteUser(w, r)
+		}
 	default:
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
@@ -64,26 +67,26 @@ func getUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func createUser(w http.ResponseWriter, r *http.Request) {
-    // Retrieve form values from the request
-    username := r.FormValue("username")
-    email := r.FormValue("email")
+	// Retrieve form values from the request
+	username := r.FormValue("username")
+	email := r.FormValue("email")
 
-    // Create a new User object with the form values
-    newUser := User{
-        ID:       len(users) + 1,
-        Username: username,
-        Email:    email,
-    }
+	// Create a new User object with the form values
+	newUser := User{
+		ID:       len(users) + 1,
+		Username: username,
+		Email:    email,
+	}
 
-    // Log the newUser object
-    fmt.Println("New user:", newUser)
+	// Log the newUser object
+	fmt.Println("New user:", newUser)
 
-    // Add the newUser to the users slice
-    users = append(users, newUser)
+	// Add the newUser to the users slice
+	users = append(users, newUser)
 
-    // Respond with the newUser as JSON
-    w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(newUser)
+	// Respond with the newUser as JSON
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(newUser)
 }
 
 func deleteUser(w http.ResponseWriter, r *http.Request) {
@@ -117,12 +120,13 @@ func deleteUser(w http.ResponseWriter, r *http.Request) {
 	users = append(users[:index], users[index+1:]...)
 
 	w.WriteHeader(http.StatusOK)
+	response := map[string]string{"message": "User deleted successfully"}
+	json.NewEncoder(w).Encode(response)
 }
 
-
 func mainPage(w http.ResponseWriter, r *http.Request) {
-    // Serve the HTML file containing the basic UI
-    http.ServeFile(w, r, "./index.html")
+	// Serve the HTML file containing the basic UI
+	http.ServeFile(w, r, "./index.html")
 }
 
 func main() {
